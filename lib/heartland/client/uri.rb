@@ -1,4 +1,5 @@
 require 'uri'
+require 'cgi'
 
 module HeartlandRetail
   class Client
@@ -38,7 +39,7 @@ module HeartlandRetail
       def subpath(subpath)
         uri = dup
         uri.path = "#{path}/" unless path.end_with?('/')
-        uri.path = uri.path + ::URI.encode(subpath.to_s.gsub(/^\//, ''))
+        uri.path = uri.path + CGI::escape(subpath.to_s.gsub(/^\//, ''))
         uri
       end
 
